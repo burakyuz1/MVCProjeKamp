@@ -80,26 +80,6 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Concrate\Context.cs" />
     <Compile Include="Concrate\Repositories\GenericRepository.cs" />
-    <Compile Include="Migrations\202107111659586_mig3134123.cs" />
-    <Compile Include="Migrations\202107111659586_mig3134123.designer.cs">
-      <DependentUpon>202107111659586_mig3134123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107121251056_3131313131313.cs" />
-    <Compile Include="Migrations\202107121251056_3131313131313.designer.cs">
-      <DependentUpon>202107121251056_3131313131313.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107121708132_addReadProp123.cs" />
-    <Compile Include="Migrations\202107121708132_addReadProp123.designer.cs">
-      <DependentUpon>202107121708132_addReadProp123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107131216313_313172.cs" />
-    <Compile Include="Migrations\202107131216313_313172.designer.cs">
-      <DependentUpon>202107131216313_313172.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107141512236_RoleForUser.cs" />
-    <Compile Include="Migrations\202107141512236_RoleForUser.designer.cs">
-      <DependentUpon>202107141512236_RoleForUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,23 +97,6 @@
       <Project>{9c4dee6a-402a-4d83-a13c-32873e033f1f}</Project>
       <Name>EntityLayer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202107111659586_mig3134123.resx">
-      <DependentUpon>202107111659586_mig3134123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107121251056_3131313131313.resx">
-      <DependentUpon>202107121251056_3131313131313.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107121708132_addReadProp123.resx">
-      <DependentUpon>202107121708132_addReadProp123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107131216313_313172.resx">
-      <DependentUpon>202107131216313_313172.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107141512236_RoleForUser.resx">
-      <DependentUpon>202107141512236_RoleForUser.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
