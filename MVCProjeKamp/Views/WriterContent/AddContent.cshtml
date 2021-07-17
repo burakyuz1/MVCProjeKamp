@@ -1,0 +1,37 @@
+﻿@model EntityLayer.Concrate.Content
+
+
+@{
+    ViewBag.Title = "AddContent";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col mt-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+                <h3 class="card-title">ADD YOUR TITLE</h3>
+
+
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("SaveContent", "WriterContent", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="inputName">What would you like to comment about?</label>
+                        @Html.TextAreaFor(m => m.ContentText, 5, 20, new { @class = "form-control" })
+
+                    </div>
+
+                    <input type="hidden" value="@ViewBag.TitleID" name="HeadingID"/>
+                    <button type="submit" class="btn btn-success btn-lg">Save</button>
+
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

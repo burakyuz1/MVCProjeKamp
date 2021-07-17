@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="modal-secondary">
+    <div class="modal-dialog">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h4 class="modal-title">About Page</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="/About/SaveAbout/" class="form-group">
+                <div class="modal-body">
+                    <label>About Text 1</label>
+                    <input type="text" name="AboutDetails1" class="form-control" />
+
+                    <label>About Text 2</label>
+                    <input type="text" name="AboutDetails2" class="form-control" />
+
+                    <label>About Image Link 1</label>
+                    <input type="text" name="AboutImage1" class="form-control" />
+
+                    <label>About Image Link 2</label>
+                    <input type="text" name="AboutImage2" class="form-control" />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-light">Save changes</button>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

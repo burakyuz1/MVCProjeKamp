@@ -1,0 +1,93 @@
+﻿@model List<EntityLayer.Concrate.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{ string isRead = "", bgColor = ""; }
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Inbox</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        @Html.Action("GetSideBarForMessage", "Contact")
+
+        <div class="col-md-9">
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">Contact Messages</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table tblMessageBox">
+                        <thead>
+                            <tr>
+                                <th class="nosort" style="width: 7%"></th>
+                                <th style="width: 20%">Message Sender</th>
+                                <th style="width: 55%">Subject - Content</th>
+                                <th style="width: 10%">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var contact in Model)
+                            {
+
+                                if (contact.IsContactRead == false)
+                                {
+                                    isRead = "font-weight-bold";
+                                    bgColor = "";
+
+                                }
+                                else
+                                {
+                                    isRead = "";
+                                    bgColor = "background-color: #E6E6E6";
+                                }
+                                <tr style="@bgColor">
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check1">
+                                            <label for="check1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="mailbox-name"><a class="@isRead" href="/Contact/ReadMessageFromContact/@contact.ContactID">@contact.UserName</a></td>
+                                    <td class="mailbox-subject">
+                                        @if (contact.Message.Length < 50)
+                                        {
+                                            @contact.Message;
+                                        }
+                                        else
+                                        {
+                                        <p class="@isRead">@contact.Subject - @contact.Message.Substring(0, 50)... </p>
+                                        } 
+
+                                    </td>
+
+                                    <td class="mailbox-date @isRead">@(((DateTime)contact.ContactDate).ToString("yyyy-MM-dd"))</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

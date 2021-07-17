@@ -1,0 +1,62 @@
+﻿@model EntityLayer.Concrate.Writer
+
+@{
+    ViewBag.Title = "WriterForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col mt-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+                <h3 class="card-title">Writer Form</h3>
+
+
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("SaveWriter", "Writer", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Surname</label>
+                        @Html.TextBoxFor(x => x.WriterSurname, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Mail</label>
+                        @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Password</label>
+                        @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Image</label>
+                        @Html.TextBoxFor(x => x.WriterPicture, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Title</label>
+                        @Html.TextBoxFor(x => x.WriterTitle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">About yourself</label>
+                        @Html.TextAreaFor(x => x.WriterAbout, new { @class = "form-control", rows = "4" })
+                    </div>
+                    @Html.HiddenFor(x => x.WriterID)
+                    <button type="submit" class="btn btn-success btn-lg">Save</button>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

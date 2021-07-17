@@ -1,0 +1,135 @@
+﻿@model List<EntityLayer.Concrate.Heading>
+@{
+    ViewBag.Title = "Index";
+ 
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+
+@{string type = "", textForBadge = "", textForDelete = "", typeForDelete = "", iconForDelete = ""; }
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1></h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">TITLE PAGE</h3>
+            <div class="card-tools">
+                <a class="btn btn-outline-secondary" href="/heading/addheading/"> <i class="fas fa-plus-circle"></i> Add Title</a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped projects MyDataTable">
+                <thead>
+                    <tr>
+                        <th style="width: 3%">
+                            #
+                        </th>
+                        <th style="width: 20%">
+                            Title Name
+
+                        </th>
+                        <th style="width: 20%">
+                            Creator
+
+                        </th>
+                        <th style="width: 8%">
+                            Status
+
+                        </th>
+                        <th style="width: 8%" class="text-center">
+                            Category
+                        </th>
+
+                        <th class="nosort" style="width: 20%">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var heading in Model)
+                    {
+                        if (heading.HeadingStatus == true)
+                        {
+                            type = "badge badge-success";
+                            textForBadge = "Enabled";
+                            textForDelete = "Disable";
+                            typeForDelete = "btn btn-outline-danger btn-sm";
+                            iconForDelete = "fas fa-times";
+                        }
+                        else
+                        {
+                            type = "badge badge-danger";
+                            textForBadge = "Disabled";
+                            textForDelete = "Enable";
+                            typeForDelete = "btn btn-outline-success btn-sm";
+                            iconForDelete = "fas fa-check";
+                        }
+                        <tr>
+                            <td>
+                                @heading.HeadingID
+                            </td>
+                            <td>
+                                <a>
+                                    @heading.HeadingName
+                                </a>
+                                <br />
+                                <small>
+                                    @heading.HeadingDate
+                                </small>
+                            </td>
+                            <td>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="@heading.Writer.WriterPicture" /> <p class="lead">@heading.Writer.WriterName @heading.Writer.WriterSurname</p>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="@type">@textForBadge</span>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-primary">@heading.Category.CategoryName</span>
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-outline-primary btn-sm" href="/Content/GetContents/@heading.HeadingID">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    Texts
+                                </a>
+                                <a class="btn btn-outline-info btn-sm" href="/heading/updateHeading/@heading.HeadingID">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="@typeForDelete" href="/heading/DeleteHeading/@heading.HeadingID">
+                                    <i class="@iconForDelete">
+                                    </i>
+                                    @textForDelete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+        </div>
+        
+    </div>
+ 
+</section>
+
+
+
+

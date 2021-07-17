@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card-group">
+    <div class="card text-white bg-gradient-teal mr-3" style="max-width: 18rem;">
+        <div class="card-header">İçinde A harfi geçen yazar sayısı</div>
+        <div class="card-body">
+
+            <p class="card-text display-3 text-center">@ViewBag.WriterCount</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-gradient-indigo mr-3" style="max-width: 18rem;">
+        <div class="card-header">Total Category Sayısı</div>
+        <div class="card-body">
+
+            <p class="card-text display-3 text-center">@ViewBag.TotalCategory</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-gradient-gray-dark mr-3" style="max-width: 18rem;">
+        <div class="card-header">Statusler arası sayısal fark</div>
+        <div class="card-body">
+
+            <p class="card-text display-3 text-center">@ViewBag.Difference</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-gradient-lightblue mr-3" style="max-width: 18rem;">
+        <div class="card-header">Kültür Category adet sayısı</div>
+        <div class="card-body">
+
+            <p class="card-text display-3 text-center">@ViewBag.FilteredHeadingName</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-gradient-olive mr-3" style="max-width: 18rem;">
+        <div class="card-header">En fazla Category sahip başlık</div>
+        <div class="card-body">
+
+            <p class="card-text display-3 text-center">  @ViewBag.MaxCategory </p>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+    
