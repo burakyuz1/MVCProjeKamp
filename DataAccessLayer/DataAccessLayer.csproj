@@ -80,6 +80,14 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Concrate\Context.cs" />
     <Compile Include="Concrate\Repositories\GenericRepository.cs" />
+    <Compile Include="Migrations\202107251030283_aylmiueka.cs" />
+    <Compile Include="Migrations\202107251030283_aylmiueka.designer.cs">
+      <DependentUpon>202107251030283_aylmiueka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107251227421_aylmue.cs" />
+    <Compile Include="Migrations\202107251227421_aylmue.designer.cs">
+      <DependentUpon>202107251227421_aylmue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +105,14 @@
       <Project>{9c4dee6a-402a-4d83-a13c-32873e033f1f}</Project>
       <Name>EntityLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202107251030283_aylmiueka.resx">
+      <DependentUpon>202107251030283_aylmiueka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107251227421_aylmue.resx">
+      <DependentUpon>202107251227421_aylmue.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

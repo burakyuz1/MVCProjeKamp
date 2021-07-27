@@ -42,8 +42,8 @@ namespace EntityLayer.Concrate
         [Required]
         public string WriterPicture { get; set; }
 
-        [StringLength(1)]
-        public string WriterRole { get; set; }
+      
+        public bool WriterStatus { get; set; }
 
         public ICollection<Heading> Headings { get; set; }
 

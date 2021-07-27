@@ -29,7 +29,8 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Datatables -->
     <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-   
+    <!-- PagedList -->
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
 
 </head>
 
@@ -51,14 +52,15 @@
                         <img src="~/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@User.Identity.Name</a>
+
+                        <a href="#" class="d-block">@Html.Action("GetNameOfAdmin","Login")</a>
                     </div>
                 </div>
              
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="/AdminCategory/Index/" class="nav-link">
                                 <i class="nav-icon fas fa-layer-group"></i>
@@ -68,30 +70,62 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/Heading/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tenge"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book-reader"></i>
                                 <p>
-                                    Titles
+                                    Entries
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book-reader"></i>
+                                <i class="nav-icon fas fa-tenge"></i>
                                 <p>
-                                    Texts
+                                    Titles
                                 </p>
+                                <i class="right fas fa-angle-left"></i>
+
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Heading/Index" class="nav-link">
+                                        <i class="fas fa-user-check nav-icon"></i>
+                                        <p> Active Titles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Heading/GetPassiveHeadings/" class="nav-link">
+                                        <i class="fas fa-user-times nav-icon"></i>
+                                        <p> Passive Titles</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="/Writer/Index" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-feather-alt"></i>
                                 <p>
                                     Writers
                                 </p>
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Writer/Index" class="nav-link">
+                                        <i class="fas fa-user-check nav-icon"></i>
+                                        <p> Active Writers</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Writer/GetBannedWriters/" class="nav-link">
+                                        <i class="fas fa-user-times nav-icon"></i>
+                                        <p> Banned Writers</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
 
 
@@ -176,6 +210,27 @@
                                 <p>
                                     Logout
                                 </p>
+                            </a>
+
+                        </li>
+                        <hr />
+                        <li class="nav-item has-treeview">
+                            <a href="/ToDoList/Index/" class="nav-link">
+                                <i class="nav-icon fab fa-angellist"></i>
+                                <p>
+                                    ToDoList - Backend
+                                </p>
+                                <i class="nav-icon fab fa-angellist"></i>
+                            </a>
+
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="/ToDoList/IndexFront/" class="nav-link">
+                                <i class="nav-icon fab fa-angellist"></i>
+                                <p>
+                                    ToDoList - Frontend
+                                </p>
+                                <i class="nav-icon fab fa-angellist"></i>
                             </a>
 
                         </li>

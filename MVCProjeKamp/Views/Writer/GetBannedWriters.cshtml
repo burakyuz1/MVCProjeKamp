@@ -21,15 +21,8 @@
 
     <div class="card card-solid mb-0">
         <div class="card-header">
-            <h3 class="card-title">ACTIVE WRITERS PAGE</h3>
+            <h3 class="card-title">BANNED WRITERS PAGE</h3>
 
-            <div class="card-tools">
-
-
-                <a href="/Writer/AddWriter/" class="btn btn-outline-secondary"><i class="fas fa-plus-circle"></i> Add New Writer</a>
-
-
-            </div>
         </div>
         <div class="clearfix mt-2 mr-3">
             <div class="float-right">
@@ -91,12 +84,12 @@
                                         <i class="fas fa-heading"></i>eadings
                                     </a>
                                     <a href="/Writer/UpdateWriter/@writer.WriterID" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user-edit"></i> 
+                                        <i class="fas fa-user-edit"></i>
                                          Edit
                                     </a>
-                                    <a href="/Writer/BanWriter/@writer.WriterID" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-ban"></i> 
-                                         Ban
+                                    <a href="/Writer/BanWriter/@writer.WriterID" class="btn btn-sm btn-success">
+                                        <i class="fas fa-check"></i>
+                                         Unban
                                     </a>
                                 </div>
                             </div>
@@ -107,7 +100,7 @@
         </div>
     </div>
 
-  
+
 
 </section>
 
@@ -127,7 +120,7 @@
     $(".searchText").on("keyup", function () {
         var txtEnter = $(this).val().toLowerCase();
         var AllContents = document.querySelectorAll("#ContentDiv");
-      
+
         AllContents.forEach(function (eachContent) {
 
             var eachWriterNameSurname = eachContent.children[0].children[1].children[0].children[0].children[0].textContent.toLowerCase();

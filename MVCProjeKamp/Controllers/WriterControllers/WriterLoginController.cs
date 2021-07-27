@@ -19,15 +19,19 @@ namespace MVCProjeKamp.Controllers.WriterControllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(Writer writer)
         {
+
             var model = wlm.GetWriter(writer);
-            if (model!=null)
+            ViewBag.NameSurname = model.WriterName;
+
+            if (model != null)
             {
-                
+
                 FormsAuthentication.SetAuthCookie(model.WriterMail, false);
-               
+
                 Session["WriterMail"] = model.WriterMail;
                 ViewBag.SessionNameSurname = wlm.GetWriterFromSession(model.WriterMail).WriterName + " " + wlm.GetWriterFromSession(model.WriterMail).WriterSurname;
 
@@ -38,7 +42,22 @@ namespace MVCProjeKamp.Controllers.WriterControllers
             {
                 return RedirectToAction("Index");
             }
-          
+
+
+        }
+
+        public ActionResult GetLoggedNameSurname()
+        {
+            var loggedUser = (string)Session["WriterMail"];
+            string loggerNameSurname = wlm.GetWriterFromSession(loggedUser).WriterName + " " + wlm.GetWriterFromSession(loggedUser).WriterSurname;
+            return Content(loggerNameSurname);
+        }
+
+        public ActionResult GetLoggedUsersImage()
+        {
+            var loggedUser = (string)Session["WriterMail"];
+            string loggerImage = wlm.GetWriterFromSession(loggedUser).WriterPicture;
+            return Content(loggerImage);
         }
     }
 }

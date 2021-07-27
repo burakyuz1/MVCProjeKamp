@@ -13,7 +13,8 @@ namespace MVCProjeKamp.Controllers
     public class ContactController : Controller
     {
         ContactManager contactManager = new ContactManager(new GenericRepository<Contact>());
-       
+        MessageManager mm = new MessageManager(new GenericRepository<Message>());
+
 
         // GET: Contact
         public ActionResult Index()
@@ -23,7 +24,9 @@ namespace MVCProjeKamp.Controllers
         }
         public PartialViewResult GetSideBarForMessage()
         {
+            var loggedUser = (string)Session["AdminUserName"];
             ViewBag.UnreadCount = contactManager.GetUnreadContactCount();
+            ViewBag.UnreadMessageCount = mm.GetUnreadMessageCount(loggedUser);
             return PartialView();
         }
         public ActionResult ReadMessageFromContact(int id)

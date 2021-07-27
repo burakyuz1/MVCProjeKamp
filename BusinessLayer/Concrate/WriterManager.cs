@@ -19,7 +19,7 @@ namespace BusinessLayer.Concrate
 
         public void AddWriter(Writer writer)
         {
-             _writer.Add(writer);
+            _writer.Add(writer);
         }
 
         public void DeleteWriter(Writer writer)
@@ -27,10 +27,7 @@ namespace BusinessLayer.Concrate
             _writer.Delete(writer);
         }
 
-        public List<Writer> GetWriterList()
-        {
-            return _writer.List();
-        }
+
 
         public Writer GetWriterByID(int id)
         {
@@ -46,5 +43,25 @@ namespace BusinessLayer.Concrate
         {
             return _writer.Get(x => x.WriterMail == mail);
         }
+
+        public List<Writer> GetWriterList(string writerForSearch)
+        {
+            return _writer.List(x => x.WriterName.Contains(writerForSearch) || x.WriterSurname.Contains(writerForSearch) && x.WriterStatus == true);
+        }
+
+        public List<Writer> GetWriterList(bool status)
+        {
+            if (status)
+            {
+                return _writer.List(x => x.WriterStatus == true);
+            }
+            else
+            {
+                return _writer.List(x => x.WriterStatus == false);
+            }
+
+        }
+
     }
 }
+

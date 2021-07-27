@@ -27,18 +27,31 @@ namespace BusinessLayer.Concrate
             _message.Delete(message);
         }
 
-        public Message GetMessageByID(int id)
+        public List<Message> GetAllDeletedMessages(string userName, string status)
+        {
+            return _message.List(x => x.MessageStatus == status && (x.MessageSender == userName || x.MessageReciever == userName));
+        }
+
+        public Message GetMessageByID(int? id)
         {
             return _message.Get(x => x.MessageID == id);
         }
 
-        public List<Message> GetMessageInbox(string userName)
+        public List<Message> GetMessageInbox(string userName, string status)
         {
-            return _message.List(x => x.MessageReciever == userName);
+            return _message.List(x => x.MessageReciever == userName && x.MessageStatus == status);
         }
-        public List<Message> GetMessageSendbox(string userName)
+
+  
+
+        public List<Message> GetMessageSendbox(string userName, string status)
         {
-            return _message.List(x => x.MessageSender == userName);
+            return _message.List(x => x.MessageSender == userName && x.MessageStatus == status);
+        }
+
+        public int GetUnreadMessageCount(string loggedUser)
+        {
+            return _message.List(x => x.IsMessageRead == false && x.MessageReciever == loggedUser).Count;
         }
 
         public void UpdateMessage(Message message)

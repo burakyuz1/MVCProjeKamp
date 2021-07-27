@@ -29,7 +29,7 @@ namespace MVCProjeKamp.Controllers.WriterControllers
         }
         public ActionResult AllHeadings()
         {
-            var model = hm.GetHeadingList();
+            var model = hm.GetHeadingList(true);
 
             return View(model);
         }

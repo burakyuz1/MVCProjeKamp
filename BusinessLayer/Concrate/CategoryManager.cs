@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrate
 
         public List<Category> GetCategoryList()
         {
-            return _cat.List();
+            return _cat.List(x=>x.CategoryStatus == true);
         }
         public int GetCategoryListByStatus()
         {

@@ -1,7 +1,8 @@
 ﻿@model List<EntityLayer.Concrate.Message>
+
 @{
-    ViewBag.Title = "Inbox";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "GetDeletedMessages";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 @{ string isRead = "", bgColor = ""; }
@@ -14,17 +15,20 @@
             </div>
 
         </div>
+
     </div>
 </section>
 
 <section class="content">
     <div class="row">
-        @Html.Action("GetSideBarForMessage", "Contact")
+        @Html.Action("GetSideBarForUserMessage", "WriterMessage")
+
 
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Inbox</h3>
+                    <h3 class="card-title">Trash</h3>
+                    <a href="/WriterMessage/DeleteAllMessages/" class="btn btn-default btn float-right"><i class="fas fa-broom"></i> Click to clear trash</a>
 
                 </div>
 
@@ -34,11 +38,12 @@
                         <thead>
                             <tr>
 
-                                <th style="width: 20%">From</th>
+                                <th style="width: 15%">From</th>
+                                <th style="width: 20%">To</th>
                                 <th style="width: 55%">Subject - Content</th>
 
                                 <th style="width: 10%">Date</th>
-                                <th class="nosort" style="width: 3%"></th>
+                                <th class="nosort" style="width: 3%"> Del Permanent</th>
                             </tr>
                         </thead>
 
@@ -59,17 +64,17 @@
 
                                 <tr style="@bgColor" class=@isRead>
 
-
-                                    <td class="mailbox-name">@message.MessageSender</td>
+                                    <td>@message.MessageSender</td>
+                                    <td>@message.MessageReciever</td>
+                                    @*<td class="mailbox-name"><a href="/Message/ReadMessageFromAdmin/@message.MessageID">@message.MessageSender</a></td>*@
                                     <td class="mailbox-subject ">
                                         @if (message.MessageContent.Length < 50)
                                         {
-                                            <a href="/Message/ReadMessageFromAdmin/@message.MessageID"> <p>@message.MessageSubject - @message.MessageContent</p></a>
-
+                                            <p>@message.MessageSubject - @message.MessageContent</p>
                                         }
                                         else
                                         {
-                                            <a href="/Message/ReadMessageFromAdmin/@message.MessageID"> <p>@message.MessageSubject - @message.MessageContent.Substring(0, 50) ...</p></a>
+                                            <p>@message.MessageSubject - @message.MessageContent.Substring(0, 50) ...</p>
                                         }
 
                                     </td>
@@ -77,11 +82,7 @@
                                     <td class="mailbox-date ">@(((DateTime)message.MessageDate).ToString("yyyy-MM-dd"))</td>
 
                                     <td>
-                                        <div class="btn-group">
-                                            <a href="/Message/NewMessage/@message.MessageID" class="btn btn-sm" title="Reply"><i class="fas fa-reply"></i></a>
-                                            <a title="Delete" class="btn btn-sm" href="/Message/DeleteMessage/@message.MessageID"><i class="fas fa-trash"></i></a>
-
-                                        </div>
+                                        <a class="btn btn-sm" href="/WriterMessage/DeleteMessage/@message.MessageID"><i class="fas fa-trash"></i></a>
                                     </td>
 
                                 </tr>
@@ -91,6 +92,8 @@
                     </table>
 
                 </div>
+
+
 
             </div>
 

@@ -26,9 +26,17 @@ namespace BusinessLayer.Concrate
             _headings.Update(heading);
         }
 
-        public List<Heading> GetHeadingList()
+        public List<Heading> GetHeadingList(bool status)
         {
-            return _headings.List();
+            if (status)
+            {
+                return _headings.List(x => x.HeadingStatus == true);
+            }
+            else
+            {
+                return _headings.List(x => x.HeadingStatus == false);
+            }
+
         }
 
         public Heading GetHeadingByID(int id)
@@ -51,9 +59,8 @@ namespace BusinessLayer.Concrate
             return _headings.List(x => x.Writer.WriterMail == userName && x.HeadingStatus == true);
         }
 
-        //public List<Heading> br(List<Heading> listOfLoginedHeadings)
-        //{
-        //    return _headings.List(x => x.HeadingStatus == true);
-        //}
+        
+
+      
     }
 }

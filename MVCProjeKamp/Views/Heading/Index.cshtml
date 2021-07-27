@@ -7,7 +7,6 @@
 }
 
 
-@{string type = "", textForBadge = "", textForDelete = "", typeForDelete = "", iconForDelete = ""; }
 
 <section class="content-header">
     <div class="container-fluid">
@@ -22,7 +21,7 @@
 <section class="content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">TITLE PAGE</h3>
+            <h3 class="card-title">ACTIVE TITLES PAGE</h3>
             <div class="card-tools">
                 <a class="btn btn-outline-secondary" href="/heading/addheading/"> <i class="fas fa-plus-circle"></i> Add Title</a>
             </div>
@@ -43,11 +42,8 @@
                             Creator
 
                         </th>
-                        <th style="width: 8%">
-                            Status
-
-                        </th>
-                        <th style="width: 8%" class="text-center">
+                       
+                        <th style="width: 15%" class="text-center">
                             Category
                         </th>
 
@@ -58,22 +54,7 @@
                 <tbody>
                     @foreach (var heading in Model)
                     {
-                        if (heading.HeadingStatus == true)
-                        {
-                            type = "badge badge-success";
-                            textForBadge = "Enabled";
-                            textForDelete = "Disable";
-                            typeForDelete = "btn btn-outline-danger btn-sm";
-                            iconForDelete = "fas fa-times";
-                        }
-                        else
-                        {
-                            type = "badge badge-danger";
-                            textForBadge = "Disabled";
-                            textForDelete = "Enable";
-                            typeForDelete = "btn btn-outline-success btn-sm";
-                            iconForDelete = "fas fa-check";
-                        }
+                       
                         <tr>
                             <td>
                                 @heading.HeadingID
@@ -90,13 +71,11 @@
                             <td>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="@heading.Writer.WriterPicture" /> <p class="lead">@heading.Writer.WriterName @heading.Writer.WriterSurname</p>
+                                        <img alt="Avatar" class="table-avatar" src="@heading.Writer.WriterPicture" /> <text class="lead">@heading.Writer.WriterName @heading.Writer.WriterSurname</text>
                                     </li>
                                 </ul>
                             </td>
-                            <td>
-                                <span class="@type">@textForBadge</span>
-                            </td>
+                     
                             <td class="project-state">
                                 <span class="badge badge-primary">@heading.Category.CategoryName</span>
                             </td>
@@ -104,18 +83,21 @@
                                 <a class="btn btn-outline-primary btn-sm" title="Titles" href="/Content/GetContents/@heading.HeadingID">
                                     <i class="fas fa-tenge">
                                     </i>
-                                    
+                                    Entries
                                 </a>
                                 <a class="btn btn-outline-info btn-sm" title="Edit" href="/heading/updateHeading/@heading.HeadingID">
                                     <i class="fas fa-pencil-alt">
                                     </i>
+
+                                </a>
+
+                                <a class="btn btn-outline-danger btn-sm" href="/heading/DeleteHeading/@heading.HeadingID">
+                                    <i class="fas fa-trash">
+                                    </i>
                                     
                                 </a>
-                                <a class="@typeForDelete" href="/heading/DeleteHeading/@heading.HeadingID">
-                                    <i class="@iconForDelete">
-                                    </i>
-                                    @textForDelete
-                                </a>
+
+
                             </td>
                         </tr>
                     }

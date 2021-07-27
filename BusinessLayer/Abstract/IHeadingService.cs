@@ -14,8 +14,10 @@ namespace BusinessLayer.Abstract
         void AddHeading(Heading heading);
         void UpdateHeading(Heading heading);
         void DeleteHeading(Heading heading);
-        List<Heading> GetHeadingList();
+        List<Heading> GetHeadingList(bool status);
         Heading GetHeadingByID(int id);
+
+    
 
 
      

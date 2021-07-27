@@ -31,38 +31,41 @@
                     <table class="table tblMessageBox">
                         <thead>
                             <tr>
-                                <th class="nosort" style="width: 7%"></th>
-                                <th style="width: 20%">Message Sender</th>
+
+                                <th style="width: 20%">To</th>
                                 <th style="width: 55%">Subject - Content</th>
+
                                 <th style="width: 10%">Date</th>
+                                <th class="nosort" style="width: 3%"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var message in Model)
                             {
                                 <tr>
-                                    <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
-                                        </div>
-                                    </td>
 
-                                    <td class="mailbox-name"><a href="/WriterMessage/ReadMessageForWriter/@message.MessageID">@message.MessageReciever</a></td>
+                                    <td class="mailbox-name">@message.MessageReciever</td>
                                     <td class="mailbox-subject">
 
-                                        <b>@message.MessageSubject</b> -
                                         @if (message.MessageContent.Length < 50)
                                         {
-                                            @message.MessageContent;
+                                            <a href="/WriterMessage/ReadMessageForWriter/@message.MessageID"> <p>@message.MessageSubject - @message.MessageContent</p></a>
+
                                         }
                                         else
                                         {
-                                            @message.MessageContent.Substring(0, 50);
+                                            <a href="/WriterMessage/ReadMessageForWriter/@message.MessageID"> <p>@message.MessageSubject - @message.MessageContent.Substring(0, 50) ...</p></a>
+
+
                                         }
-                                        ...
                                     </td>
                                     <td class="mailbox-date"><b>@(((DateTime)message.MessageDate).ToString("yyyy-MM-dd"))</b></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/WriterMessage/NewMessage/@message.MessageID" class="btn btn-sm" title="Reply"><i class="fas fa-reply"></i></a>
+                                            <a class="btn btn-sm" href="/WriterMessage/DeleteMessage/@message.MessageID"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

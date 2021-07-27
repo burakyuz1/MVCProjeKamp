@@ -55,8 +55,10 @@ namespace MVCProjeKamp.Controllers
         }
         public ActionResult DeleteCategory(int id)
         {
-            var categoryForDelete = cm.GetCategoryByID(id);
-            cm.DeleteCategory(categoryForDelete);
+            var model = cm.GetCategoryByID(id);
+            model.CategoryStatus = false;
+            cm.UpdateCategory(model);
+           
             return RedirectToAction("Index");
         }
         [HttpGet]

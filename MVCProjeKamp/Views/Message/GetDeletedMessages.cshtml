@@ -1,10 +1,8 @@
-﻿@model List<EntityLayer.Concrate.Contact>
-
+﻿@model List<EntityLayer.Concrate.Message>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inbox";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 
 @{ string isRead = "", bgColor = ""; }
 
@@ -12,9 +10,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Inbox</h1>
+                <h1>MESSAGEBOX</h1>
             </div>
+
         </div>
+        
     </div>
 </section>
 
@@ -25,7 +25,9 @@
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">CONTACT MESSAGES</h3>
+                    <h3 class="card-title">Trash</h3>
+                    <a href="/Message/DeleteAllMessages/" class="btn btn-default btn float-right"><i class="fas fa-broom"></i> Click to clear trash</a>
+
                 </div>
 
                 <div class="card-body">
@@ -33,17 +35,20 @@
                     <table class="table tblMessageBox">
                         <thead>
                             <tr>
-                                <th class="nosort" style="width: 7%"></th>
-                                <th style="width: 20%">Message Sender</th>
+
+                                <th style="width: 15%">From</th>
+                                <th style="width: 20%">To</th>
                                 <th style="width: 55%">Subject - Content</th>
+
                                 <th style="width: 10%">Date</th>
+                                <th class="nosort" style="width: 3%"> Del Permanent</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var contact in Model)
-                            {
 
-                                if (contact.IsContactRead == false)
+                        <tbody>
+                            @foreach (var message in Model)
+                            {
+                                if (message.IsMessageRead == false)
                                 {
                                     isRead = "font-weight-bold";
                                     bgColor = "";
@@ -54,40 +59,40 @@
                                     isRead = "";
                                     bgColor = "background-color: #E6E6E6";
                                 }
-                                <tr style="@bgColor">
-                                    <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="mailbox-name">@contact.UserName</td>
-                                    <td class="mailbox-subject">
-                                        @if (contact.Message.Length < 50)
+
+                                <tr style="@bgColor" class=@isRead>
+
+                                    <td>@message.MessageSender</td>
+                                    <td>@message.MessageReciever</td>
+                                    @*<td class="mailbox-name"><a href="/Message/ReadMessageFromAdmin/@message.MessageID">@message.MessageSender</a></td>*@
+                                    <td class="mailbox-subject ">
+                                        @if (message.MessageContent.Length < 50)
                                         {
-                                            <a class="@isRead" href="/Contact/ReadMessageFromContact/@contact.ContactID">
-                                                <p class=@isRead>@contact.Subject - @contact.Message</p>
-                                            </a>
+                                            <p>@message.MessageSubject - @message.MessageContent</p>
                                         }
                                         else
                                         {
-                                            <a class="@isRead" href="/Contact/ReadMessageFromContact/@contact.ContactID">
-                                                <p class="@isRead">@contact.Subject - @contact.Message.Substring(0, 50)... </p>
-                                            </a>
+                                            <p>@message.MessageSubject - @message.MessageContent.Substring(0, 50) ...</p>
                                         }
 
                                     </td>
 
-                                    <td class="mailbox-date @isRead">@(((DateTime)contact.ContactDate).ToString("yyyy-MM-dd"))</td>
+                                    <td class="mailbox-date ">@(((DateTime)message.MessageDate).ToString("yyyy-MM-dd"))</td>
+
+                                    <td>
+                                        <a class="btn btn-sm" href="/Message/DeleteMessage/@message.MessageID"><i class="fas fa-trash"></i></a>
+                                    </td>
+
                                 </tr>
                             }
 
                         </tbody>
                     </table>
 
-
-
                 </div>
+
+             
+
             </div>
 
         </div>

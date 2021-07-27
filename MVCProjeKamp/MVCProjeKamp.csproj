@@ -61,6 +61,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -144,7 +147,7 @@
     <Compile Include="Controllers\AdminController\HomeController.cs" />
     <Compile Include="Controllers\AdminController\LoginController.cs" />
     <Compile Include="Controllers\AdminController\MessageController.cs" />
-    <Compile Include="Controllers\AdminController\StatisticsController.cs" />
+    <Compile Include="Controllers\AdminController\ToDoListController.cs" />
     <Compile Include="Controllers\AdminController\WriterController.cs" />
     <Compile Include="Controllers\Default\DefaultController.cs" />
     <Compile Include="Controllers\WriterControllers\WriterContentController.cs" />
@@ -2157,6 +2160,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\DTScripts.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2556,6 +2560,13 @@
     <Content Include="Views\WriterContent\AddContent.cshtml" />
     <Content Include="Views\WriterMessage\ReadMessageForWriter.cshtml" />
     <Content Include="Views\WriterProfile\Index.cshtml" />
+    <Content Include="Views\Writer\GetBannedWriters.cshtml" />
+    <Content Include="Views\Heading\GetPassiveHeadings.cshtml" />
+    <Content Include="Views\Message\GetDeletedMessages.cshtml" />
+    <Content Include="Views\Message\ReplyMessage.cshtml" />
+    <Content Include="Views\ToDoList\Index.cshtml" />
+    <Content Include="Views\WriterMessage\GetDeletedMessages.cshtml" />
+    <Content Include="Views\ToDoList\IndexFront.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

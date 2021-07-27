@@ -13,11 +13,11 @@ namespace MVCProjeKamp.Controllers.Default
     {
         HeadingManager hm = new HeadingManager(new GenericRepository<Heading>());
         ContentManager cm = new ContentManager(new GenericRepository<Content>());
-        // GET: Default
+
 
         public ActionResult Headings()
         {
-            var model = hm.GetHeadingList();
+            var model = hm.GetHeadingList(true);
             return View(model);
         }
         public PartialViewResult Index(int id=0)

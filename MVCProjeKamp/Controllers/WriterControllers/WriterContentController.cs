@@ -41,10 +41,9 @@ namespace MVCProjeKamp.Controllers.WriterControllers
         {
             content.ContentDate = DateTime.Now;
             var loggedUser = (string)Session["WriterMail"];
-            content.WriterID = wlm.GetWriterFromSession(loggedUser).WriterID;
-           
+            content.WriterID = wlm.GetWriterFromSession(loggedUser).WriterID;         
             cm.AddContent(content);
-            return RedirectToAction("GetContentsForWriter","writerContent");
+            return RedirectToAction("GetContentsForHeading/" + content.HeadingID, "writerContent");
         }
     }
 }

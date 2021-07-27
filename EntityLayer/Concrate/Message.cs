@@ -20,7 +20,10 @@ namespace EntityLayer.Concrate
         [StringLength(400)]      
         public string MessageContent { get; set; }
 
-      
+        [StringLength(1)]
+        public string MessageStatus { get; set; }
+
+
         public bool? IsMessageRead { get; set; }
         public DateTime MessageDate { get; set; }
     }

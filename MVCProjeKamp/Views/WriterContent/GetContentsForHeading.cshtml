@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
-@*<h3>All texts for @Model[0].Heading.HeadingName</h3>*@
+<h3>All texts for <b>@Model[0].Heading.HeadingName</b></h3>
 <div class="tracking-list">
 
     @foreach (var content in Model)
@@ -22,7 +22,7 @@
                 <!-- <i class="fas fa-circle"></i> -->
             </div>
             <div class="tracking-date"><span class="bg-secondary">@(((DateTime)content.ContentDate).ToString("dd-MM-yyyy"))</span><span class="bg-secondary">@(((DateTime)content.ContentDate).ToString("HH : mm"))</span></div>
-            <div class="tracking-content">@content.Heading.HeadingName <span>@content.ContentText</span></div>
+            <div class="tracking-content">@content.Writer.WriterName @content.Writer.WriterSurname <span>@content.ContentText</span></div>
         </div>
 
     }

@@ -17,17 +17,21 @@ namespace MVCProjeKamp.Controllers
         // GET: Heading
         HeadingManager hm = new HeadingManager(new GenericRepository<Heading>());
         CategoryManager cm = new CategoryManager(new GenericRepository<Category>());
-        //WriterManager wm = new WriterManager(new GenericRepository<Writer>());
-      
+        LoginManager lm = new LoginManager(new GenericRepository<Admin>());
+
         public ActionResult Index()
         {
-        
-            return View(hm.GetHeadingList());
+
+            return View(hm.GetHeadingList(true));
+        }
+        public ActionResult GetPassiveHeadings()
+        {
+            return View(hm.GetHeadingList(false));
         }
 
         [HttpGet]
         public ActionResult AddHeading()
-        {         
+        {
 
             var model = new HeadingCategoryViewModel()
             {
@@ -36,18 +40,20 @@ namespace MVCProjeKamp.Controllers
             };
 
 
-            return View("HeadingForm",model);
+            return View("HeadingForm", model);
         }
 
         [HttpPost]
         public ActionResult SaveHeading(Heading heading)
         {
-             
+            var loggedUser = (string)Session["AdminUserName"];
+        int idWriter = lm.GetAdminForRole(loggedUser).AdminID;
+            heading.WriterID = idWriter;
             heading.HeadingDate = DateTime.Now;
             int headingID = heading.HeadingID;
             ValidationResult result = new HeadingValidator().Validate(heading);
             if (!result.IsValid)
-            {               
+            {
                 var model = new HeadingCategoryViewModel()
                 {
                     Category = cm.GetCategoryList(),
@@ -58,7 +64,7 @@ namespace MVCProjeKamp.Controllers
                     ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
                 }
                 return View("HeadingForm", model);
-              
+
             }
             if (headingID == 0)
             {
@@ -85,18 +91,19 @@ namespace MVCProjeKamp.Controllers
         public ActionResult DeleteHeading(int id)
         {
             var model = hm.GetHeadingByID(id);
-            if (model.HeadingStatus == false)
+            if (model.HeadingStatus)
             {
-                model.HeadingStatus = true;
+                model.HeadingStatus = false;
+                hm.DeleteHeading(model);
+                return RedirectToAction("Index");
             }
             else
             {
-                model.HeadingStatus = false;
+                model.HeadingStatus = true;
+                hm.DeleteHeading(model);
+                return RedirectToAction("GetPassiveHeadings");
+
             }
-
-            hm.DeleteHeading(model);
-
-            return RedirectToAction("Index",model);
         }
 
     }

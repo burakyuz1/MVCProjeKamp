@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MVCProjeKamp.Controllers
 {
@@ -16,9 +18,51 @@ namespace MVCProjeKamp.Controllers
         WriterManager wm = new WriterManager(new GenericRepository<Writer>());
 
         // GET: Writer
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchForWriter)
         {
-            return View(wm.GetWriterList());
+            if (searchForWriter != null)
+            {
+                return View(wm.GetWriterList(searchForWriter).ToPagedList(page ?? 1, 6));
+            }
+            else
+            {
+                return View(wm.GetWriterList(true).ToPagedList(page ?? 1, 6));
+
+            }
+
+        }
+
+        public ActionResult GetBannedWriters(int? page, string searchForWriter)
+        {
+            if (searchForWriter != null)
+            {
+                return View(wm.GetWriterList(searchForWriter).ToPagedList(page ?? 1, 6));
+            }
+            else
+            {
+                return View(wm.GetWriterList(false).ToPagedList(page ?? 1, 6));
+
+            }
+        }
+
+        public ActionResult BanWriter(int id)
+        {
+            var model = wm.GetWriterByID(id);
+            if (model.WriterStatus)
+            {
+                model.WriterStatus = false;
+                wm.UpdateWriter(model);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                model.WriterStatus = true;
+                wm.UpdateWriter(model);
+                return RedirectToAction("GetBannedWriters");
+
+            }
+       
+          
         }
 
         [HttpGet]
@@ -30,15 +74,11 @@ namespace MVCProjeKamp.Controllers
         public ActionResult SaveWriter(Writer writer)
         {
             int writerID = writer.WriterID;
-
-            //ValidationResult result = new WriterValidator().Validate(writer);
+            writer.WriterStatus = true;
 
             if (!ModelState.IsValid)
             {
-                //foreach (var err in result.Errors)
-                //{
-                //    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
-                //}
+              
                 return View("WriterForm");
             }
             if (writerID == 0)
@@ -52,7 +92,7 @@ namespace MVCProjeKamp.Controllers
                 wm.UpdateWriter(writer);
             }
             return RedirectToAction("Index");
-           
+
         }
 
         [HttpGet]

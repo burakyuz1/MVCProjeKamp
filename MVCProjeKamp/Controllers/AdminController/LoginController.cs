@@ -36,5 +36,11 @@ namespace MVCProjeKamp.Controllers
                 return RedirectToAction("Index");
             }           
         }
+
+        public ActionResult GetNameOfAdmin()
+        {
+            string loggedUser = (string)Session["AdminUserName"];
+            return Content(lm.GetAdminForRole(loggedUser).AdminUserName);
+        }
     }
 }

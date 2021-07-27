@@ -15,38 +15,104 @@ namespace MVCProjeKamp.Controllers.WriterControllers
         // GET: WriterMessage
         public ActionResult Inbox()
         {
-            var model = mm.GetMessageInbox((string)Session["WriterMail"]);
+            var model = mm.GetMessageInbox((string)Session["WriterMail"], "a");
 
-            return View(model);
+            return View("Inbox",model);
         }
         public ActionResult Sendbox()
         {
-            var model = mm.GetMessageSendbox((string)Session["WriterMail"]);
+            var model = mm.GetMessageSendbox((string)Session["WriterMail"], "a");
             return View(model);
         }
         [HttpGet]
-        public ActionResult NewMessage()
+        public ActionResult NewMessage(int? id)
         {
-            return View();
+            var loggedUser = (string)Session["WriterMail"];
+            var model = mm.GetMessageByID(id);
+            if (model != null)
+            {
+                if (loggedUser != model.MessageSender)
+                {
+                    model.MessageReciever = model.MessageSender;
+                    model.MessageSubject = "Re : " + model.MessageSubject;
+                }
+            }
+            return View(model);
         }
         [HttpPost]
         public ActionResult SendMessage(Message msg)
         {
             msg.MessageSender = (string)Session["WriterMail"];
             msg.MessageDate = DateTime.Now;
+            msg.IsMessageRead = false;
+            msg.MessageStatus = "a";
             mm.AddNewMessage(msg);
 
-
-            return RedirectToAction("Inbox");
+            return RedirectToAction("Sendbox","WriterMessage");
         }
 
         public ActionResult ReadMessageForWriter(int id)
         {
-            return View(mm.GetMessageByID(id));
+            var model = mm.GetMessageByID(id);
+            model.IsMessageRead = true;
+            mm.UpdateMessage(model);
+            return View(model);
         }
         public PartialViewResult GetSideBarForUserMessage()
-        {
+        {            var loggedUser = (string)Session["WriterMail"];
+
+            ViewBag.UnreadMessageCount = mm.GetUnreadMessageCount(loggedUser);
             return PartialView();
+        }
+
+        public ActionResult DeleteMessage(int id)
+        {
+            var loggedUser = (string)Session["WriterMail"];
+            var model = mm.GetMessageByID(id);
+            model.IsMessageRead = true;
+            if (model.MessageStatus == "a")
+            {
+                model.MessageStatus = "p";
+
+                mm.UpdateMessage(model);
+                if (loggedUser == model.MessageSender)
+                {
+                    return RedirectToAction("Sendbox","WriterMessage");
+                }
+                else
+                {
+                    return RedirectToAction("Inbox","WriterMessage");
+                }
+
+            }
+            else
+            {
+                model.MessageStatus = "n";
+                mm.UpdateMessage(model);
+                return RedirectToAction("GetDeletedMessages","WriterMessage");
+            }
+
+
+        }
+        public ActionResult GetDeletedMessages()
+        {
+            var loggedUser = (string)Session["WriterMail"];
+            var model = mm.GetAllDeletedMessages(loggedUser, "p");
+
+            return View(model);
+        }
+        public ActionResult DeleteAllMessages()
+        {
+            var loggedUser = (string)Session["WriterMail"];
+            var model = mm.GetAllDeletedMessages(loggedUser, "p");
+
+            for (int i = 0; i < model.Count; i++)
+            {
+                model[i].MessageStatus = "n";
+                mm.UpdateMessage(model[i]);
+            }
+
+            return RedirectToAction("GetDeletedMessages", "WriterMessage");
         }
 
     }
