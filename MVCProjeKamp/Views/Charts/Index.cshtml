@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <title>Result Visualization</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<script>
+                $(document).ready(function () {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json",
+                        url: '@Url.Action("ChartsCategory", "Charts")',
+                        success: function (result) {
+                            google.charts.load('current', {
+                                'packages': ['corechart']
+                            });
+                            google.charts.setOnLoadCallback(function () {
+                                drawChart(result);
+                            });
+                        }
+                    });
+                });
+
+                function drawChart(result) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'CategoryName');
+                    data.addColumn('number', 'HeadingCount');
+                    var dataArray = [];
+
+                    $.each(result, function (i, obj) {
+                        dataArray.push([obj.CategoryName, obj.HeadingCount]);
+                    });
+                    data.addRows(dataArray);
+
+                    var columnChartOptions = {
+                        title: "Category - Heading Graphic",
+                        pieHole: 0.4
+                    };
+
+                    var columnChart = new google.visualization.PieChart(document
+                        .getElementById('donutchart'));
+
+                    columnChart.draw(data, columnChartOptions);
+                }
+</script>
+
+<div id="donutchart" style="background-color: #F4F6F9; width: 900px; height: 500px;"></div>

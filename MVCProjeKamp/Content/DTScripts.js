@@ -10,11 +10,15 @@
                 searchable: false,
             }
         ],
-        language: { search: '', searchPlaceholder: "Search..." }
+  
+        language: { search: '', searchPlaceholder: "Search..." },
+        "dom": '<"top"Bf>t<"bottom"ilp>',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
 
 
     })
-
 
 
     $('.tblMessageBox').DataTable({
@@ -28,6 +32,8 @@
             }
         ],
         language: { search: '', searchPlaceholder: "Search..." },
+     
     })
     $('.dataTables_filter label input').addClass('form-control')
+
 });

@@ -46,10 +46,12 @@ namespace BusinessLayer.Concrate
         {
             int trueStatus = _cat.List(x => x.CategoryStatus == true).Count;
             int falseStatus = _cat.List(x => x.CategoryStatus == false).Count;
-
             return trueStatus - falseStatus;
         }
 
-
+        public List<Category> CategoryChart()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,9 @@
+﻿.bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.dataTables_length label{
+    margin-top:12px;
+}

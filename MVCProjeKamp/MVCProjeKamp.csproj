@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController\AboutController.cs" />
     <Compile Include="Controllers\AdminController\AdminCategoryController.cs" />
+    <Compile Include="Controllers\AdminController\ChartsController.cs" />
     <Compile Include="Controllers\AdminController\ContactController.cs" />
     <Compile Include="Controllers\AdminController\ContentController.cs" />
     <Compile Include="Controllers\AdminController\ErrorPagesController.cs" />
@@ -2160,6 +2161,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\DTScripts.js" />
+    <Content Include="Content\dtTop.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2567,6 +2569,7 @@
     <Content Include="Views\ToDoList\Index.cshtml" />
     <Content Include="Views\WriterMessage\GetDeletedMessages.cshtml" />
     <Content Include="Views\ToDoList\IndexFront.cshtml" />
+    <Content Include="Views\Charts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

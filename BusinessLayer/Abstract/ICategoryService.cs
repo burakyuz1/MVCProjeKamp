@@ -14,7 +14,7 @@ namespace BusinessLayer.Abstract
         Category GetCategoryByID(int id);
         void DeleteCategory(Category category);
         void UpdateCategory(Category category);
-
-       int GetCategoryListByStatus();
+        int GetCategoryListByStatus();
+        List<Category> CategoryChart();
     }
 }

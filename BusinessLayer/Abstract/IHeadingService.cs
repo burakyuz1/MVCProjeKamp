@@ -17,9 +17,9 @@ namespace BusinessLayer.Abstract
         List<Heading> GetHeadingList(bool status);
         Heading GetHeadingByID(int id);
 
-    
+        int CategoryCount(string categoryName);
 
 
-     
+
     }
 }
