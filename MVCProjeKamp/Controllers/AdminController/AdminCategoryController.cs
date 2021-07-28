@@ -1,8 +1,6 @@
 ﻿using BusinessLayer.Concrate;
-using BusinessLayer.FluentValidation;
 using DataAccessLayer.Concrate.Repositories;
 using EntityLayer.Concrate;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +30,14 @@ namespace MVCProjeKamp.Controllers
         {
             var categoryID = category.CategoryID;
 
-            ValidationResult result = new CategoryValidator().Validate(category);
+            //ValidationResult result = new CategoryValidator().Validate(category);
        
-            if (result.Errors.Count > 0)
+            if (!ModelState.IsValid)
             {
-                foreach (var err in result.Errors)
-                {
-                    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
-                }
+                //foreach (var err in result.Errors)
+                //{
+                //    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
+                //}
                 return View("CategoryForm");
             }
             if (categoryID == 0)

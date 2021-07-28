@@ -24,7 +24,7 @@ namespace MVCProjeKamp.Controllers
         }
         public PartialViewResult GetSideBarForMessage()
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             ViewBag.UnreadCount = contactManager.GetUnreadContactCount();
             ViewBag.UnreadMessageCount = mm.GetUnreadMessageCount(loggedUser);
             return PartialView();

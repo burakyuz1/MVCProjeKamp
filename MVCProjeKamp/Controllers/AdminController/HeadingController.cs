@@ -1,9 +1,7 @@
 ﻿using BusinessLayer.Concrate;
-using BusinessLayer.FluentValidation;
 using DataAccessLayer.Concrate.Repositories;
 using EntityLayer.Concrate;
 using EntityLayer.ViewModels;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +15,8 @@ namespace MVCProjeKamp.Controllers
         // GET: Heading
         HeadingManager hm = new HeadingManager(new GenericRepository<Heading>());
         CategoryManager cm = new CategoryManager(new GenericRepository<Category>());
-        LoginManager lm = new LoginManager(new GenericRepository<Admin>());
+        WriterLoginManager wm = new WriterLoginManager(new GenericRepository<Writer>());
+        AlertViewModel alert = new AlertViewModel();
 
         public ActionResult Index()
         {
@@ -46,35 +45,38 @@ namespace MVCProjeKamp.Controllers
         [HttpPost]
         public ActionResult SaveHeading(Heading heading)
         {
-            var loggedUser = (string)Session["AdminUserName"];
-        int idWriter = lm.GetAdminForRole(loggedUser).AdminID;
-            heading.WriterID = idWriter;
-            heading.HeadingDate = DateTime.Now;
+            var loggedUser = (string)Session["WriterMail"];
+            heading.HeadingStatus = true;        
             int headingID = heading.HeadingID;
-            ValidationResult result = new HeadingValidator().Validate(heading);
-            if (!result.IsValid)
+            if (!ModelState.IsValid)
             {
                 var model = new HeadingCategoryViewModel()
                 {
                     Category = cm.GetCategoryList(),
                     Heading = heading
                 };
-                foreach (var err in result.Errors)
-                {
-                    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
-                }
+         
                 return View("HeadingForm", model);
 
             }
             if (headingID == 0)
             {
+                heading.HeadingDate = DateTime.Now;
+                int idWriter = wm.GetWriterFromSession(loggedUser).WriterID;
+                heading.WriterID = idWriter;
+                alert.AlertMessage = heading.HeadingName + " succesfully added..."; 
                 hm.AddHeading(heading);
             }
             else
             {
+                alert.AlertMessage = heading.HeadingName + " succesfully updates...";
                 hm.UpdateHeading(heading);
             }
-            return RedirectToAction("Index");
+
+            alert.LinkText = "Back to Title List";
+            alert.URL = "/Heading/Index/";
+            alert.Status = true;
+            return PartialView("_Alert",alert);
         }
 
         [HttpGet]

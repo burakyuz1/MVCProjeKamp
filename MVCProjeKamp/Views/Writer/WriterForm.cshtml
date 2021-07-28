@@ -19,32 +19,40 @@
                 {
                     <div class="form-group">
                         <label for="inputName">Name</label>
-                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m=>m.WriterName)
 
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Surname</label>
                         @Html.TextBoxFor(x => x.WriterSurname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WriterSurname)
                     </div>
-                    <div class="form-group">
+                    <div class="form-group">                       
+                      
                         <label for="inputDescription">Mail</label>
-                        @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", type = "email" })
+                        @Html.ValidationMessageFor(m=>m.WriterMail)
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Password</label>
-                        @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control", type = "password" })
+                        @Html.ValidationMessageFor(m => m.WriterPassword)
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Image</label>
                         @Html.TextBoxFor(x => x.WriterPicture, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WriterPicture)
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Title</label>
                         @Html.TextBoxFor(x => x.WriterTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WriterTitle)
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">About yourself</label>
                         @Html.TextAreaFor(x => x.WriterAbout, new { @class = "form-control", rows = "4" })
+                        @Html.ValidationMessageFor(m=>m.WriterAbout)
                     </div>
                     @Html.HiddenFor(x => x.WriterID)
                     <button type="submit" class="btn btn-success btn-lg">Save</button>
@@ -58,5 +66,9 @@
 </div>
 
 
+@section scripts {
 
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
 

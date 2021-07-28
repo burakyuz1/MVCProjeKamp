@@ -1,8 +1,6 @@
 ﻿using BusinessLayer.Concrate;
-using BusinessLayer.FluentValidation;
 using DataAccessLayer.Concrate.Repositories;
 using EntityLayer.Concrate;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +13,10 @@ namespace MVCProjeKamp.Controllers
     {
 
         MessageManager mm = new MessageManager(new GenericRepository<Message>());
-        MessageValidator mv = new MessageValidator();
-        // GET: Message
+
         public ActionResult Inbox()
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetMessageInbox(loggedUser, "a");
 
             //a -> Active
@@ -30,7 +27,7 @@ namespace MVCProjeKamp.Controllers
         }
         public ActionResult Sendbox()
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetMessageSendbox(loggedUser, "a");
             return View(model);
         }
@@ -40,7 +37,7 @@ namespace MVCProjeKamp.Controllers
         [HttpGet]
         public ActionResult NewMessage(int? id)
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetMessageByID(id);
             if (model != null)
             {
@@ -58,23 +55,20 @@ namespace MVCProjeKamp.Controllers
         [HttpPost]
         public ActionResult SendMessage(Message msg)
         {
-            msg.MessageSender = User.Identity.Name;
-            msg.MessageDate = DateTime.Now;
+            msg.MessageSender = (string)Session["WriterMail"];
             msg.IsMessageRead = false;
             msg.MessageStatus = "a";
-            ValidationResult result = mv.Validate(msg);
-            if (result.Errors.Count > 0)
-            {
-                foreach (var err in result.Errors)
-                {
-                    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
-                }
-                return View();
-            }
-            else
-            {
-                mm.AddNewMessage(msg);
-            }
+            msg.MessageDate = DateTime.Now;
+
+            //if (!ModelState.IsValid)
+            //{
+
+            //    return View();
+            //}
+            //else
+            //{  }
+
+            mm.AddNewMessage(msg);
 
             return RedirectToAction("Sendbox");
         }
@@ -89,7 +83,7 @@ namespace MVCProjeKamp.Controllers
 
         public ActionResult DeleteMessage(int id)
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetMessageByID(id);
             model.IsMessageRead = true;
             if (model.MessageStatus == "a")
@@ -118,14 +112,14 @@ namespace MVCProjeKamp.Controllers
         }
         public ActionResult GetDeletedMessages()
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetAllDeletedMessages(loggedUser, "p");
 
             return View(model);
         }
         public ActionResult DeleteAllMessages()
         {
-            var loggedUser = (string)Session["AdminUserName"];
+            var loggedUser = (string)Session["WriterMail"];
             var model = mm.GetAllDeletedMessages(loggedUser, "p");
 
             for (int i = 0; i < model.Count; i++)
@@ -133,7 +127,7 @@ namespace MVCProjeKamp.Controllers
                 model[i].MessageStatus = "n";
                 mm.UpdateMessage(model[i]);
             }
-           
+
             return RedirectToAction("GetDeletedMessages");
         }
     }

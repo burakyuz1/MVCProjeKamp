@@ -24,11 +24,7 @@
                     <div class="form-group">
                         <label for="inputDescription">Category</label>
                         @Html.DropDownListFor(x => x.Heading.CategoryID, new SelectList(Model.Category, "CategoryID", "CategoryName"), "Please Choose a Category", new { @class = "form-control" })
-                    </div>
-                    @*<div class="form-group">
-                        <label for="inputDescription">yazar id 1 ver kalkacak</label>
-                        @Html.TextBoxFor(x => x.Heading.WriterID, new { @class = "form-control" })
-                    </div>*@
+                    </div>              
 
                     <button type="submit" class="btn btn-success btn-lg">Save</button>
                     @Html.HiddenFor(x => x.Heading.HeadingDate)

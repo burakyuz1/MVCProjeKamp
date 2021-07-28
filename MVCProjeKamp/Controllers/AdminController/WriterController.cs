@@ -1,8 +1,6 @@
 ﻿using BusinessLayer.Concrate;
-using BusinessLayer.FluentValidation;
 using DataAccessLayer.Concrate.Repositories;
 using EntityLayer.Concrate;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;

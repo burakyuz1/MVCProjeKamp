@@ -1,10 +1,8 @@
 ﻿using BusinessLayer.Concrate;
-using BusinessLayer.FluentValidation;
 using DataAccessLayer.Concrate;
 using DataAccessLayer.Concrate.Repositories;
 using EntityLayer.Concrate;
 using EntityLayer.ViewModels;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,18 +54,15 @@ namespace MVCProjeKamp.Controllers.WriterControllers
             heading.HeadingDate = DateTime.Now;
             heading.HeadingStatus = true;
             int headingID = heading.HeadingID;
-            ValidationResult result = new HeadingValidator().Validate(heading);
-            if (!result.IsValid)
+            if (!ModelState.IsValid)
             {
                 var model = new HeadingCategoryViewModel()
                 {
                     Category = cm.GetCategoryList(),
                     Heading = heading
                 };
-                foreach (var err in result.Errors)
-                {
-                    ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
-                }
+              
+           
                 return View("WriterHeadingForm", model);
 
             }

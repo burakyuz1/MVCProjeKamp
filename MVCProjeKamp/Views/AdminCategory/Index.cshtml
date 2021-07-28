@@ -57,19 +57,18 @@
                             <td class="project-actions text-right">
                                 <a class="btn btn-outline-primary btn-sm" title="Entries" href="#">
                                    Entries
-                                    
-                                    
                                 </a>
                                 <a class="btn btn-outline-info btn-sm" title="Edit" href="/AdminCategory/EditCategory/@category.CategoryID">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     
                                 </a> 
-                                <a class="btn btn-outline-danger btn-sm" title="Delete" href="/AdminCategory/DeleteCategory/@category.CategoryID">
+                                <a id="btnDeleteCategory" class="btn btn-outline-danger btn-sm" title="Delete" data-id="@category.CategoryID">
                                     <i class="fas fa-trash">
                                     </i>
                                     
                                 </a>
+
                             </td>
                         
                         </tr>

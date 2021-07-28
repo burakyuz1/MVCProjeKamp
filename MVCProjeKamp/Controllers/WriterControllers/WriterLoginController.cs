@@ -25,18 +25,26 @@ namespace MVCProjeKamp.Controllers.WriterControllers
         {
 
             var model = wlm.GetWriter(writer);
-            ViewBag.NameSurname = model.WriterName;
 
             if (model != null)
             {
-
                 FormsAuthentication.SetAuthCookie(model.WriterMail, false);
 
                 Session["WriterMail"] = model.WriterMail;
-                ViewBag.SessionNameSurname = wlm.GetWriterFromSession(model.WriterMail).WriterName + " " + wlm.GetWriterFromSession(model.WriterMail).WriterSurname;
+                if (model.WriterRole == "u")
+                {
+                 
+                    //ViewBag.SessionNameSurname = wlm.GetWriterFromSession(model.WriterMail).WriterName + " " + wlm.GetWriterFromSession(model.WriterMail).WriterSurname;
 
 
-                return RedirectToAction("Index", "WriterHeading");
+                    return RedirectToAction("Index", "WriterHeading");
+                }
+                else
+                {
+                  
+                    return RedirectToAction("Index", "AdminCategory");
+                }
+
             }
             else
             {
