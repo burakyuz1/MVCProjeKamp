@@ -15,13 +15,20 @@ namespace MVCProjeKamp.Controllers
         // GET: Heading
         HeadingManager hm = new HeadingManager(new GenericRepository<Heading>());
         CategoryManager cm = new CategoryManager(new GenericRepository<Category>());
-        WriterLoginManager wm = new WriterLoginManager(new GenericRepository<Writer>());
-        AlertViewModel alert = new AlertViewModel();
 
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            if (id == null)
+            {
+                return View(hm.GetHeadingList(true));
+            }
+            else
+            {
+                var model = hm.GetHeadingByWriterID(id, true);
+                return View(model);
 
-            return View(hm.GetHeadingList(true));
+            }
+
         }
         public ActionResult GetPassiveHeadings()
         {
@@ -41,12 +48,13 @@ namespace MVCProjeKamp.Controllers
 
             return View("HeadingForm", model);
         }
-
         [HttpPost]
         public ActionResult SaveHeading(Heading heading)
         {
+            WriterLoginManager wm = new WriterLoginManager(new GenericRepository<Writer>());
+            AlertViewModel alert = new AlertViewModel();
             var loggedUser = (string)Session["WriterMail"];
-            heading.HeadingStatus = true;        
+
             int headingID = heading.HeadingID;
             if (!ModelState.IsValid)
             {
@@ -55,30 +63,39 @@ namespace MVCProjeKamp.Controllers
                     Category = cm.GetCategoryList(),
                     Heading = heading
                 };
-         
+
                 return View("HeadingForm", model);
 
             }
             if (headingID == 0)
             {
+                heading.HeadingStatus = true;
                 heading.HeadingDate = DateTime.Now;
                 int idWriter = wm.GetWriterFromSession(loggedUser).WriterID;
                 heading.WriterID = idWriter;
-                alert.AlertMessage = heading.HeadingName + " succesfully added..."; 
+                alert.AlertMessage = heading.HeadingName + " added succesfully...";
                 hm.AddHeading(heading);
             }
             else
             {
-                alert.AlertMessage = heading.HeadingName + " succesfully updates...";
+                if (heading.HeadingStatus)
+                {
+                    alert.LinkText = "   Back to Title List";
+                    alert.URL = "/Heading/Index/";
+                }
+                else
+                {
+                    alert.LinkText = "   Back to Passive Title List";
+                    alert.URL = "/Heading/GetPassiveHeadings/";
+                }
+                alert.AlertMessage = heading.HeadingName + " updated succesfully...";
                 hm.UpdateHeading(heading);
             }
 
-            alert.LinkText = "Back to Title List";
-            alert.URL = "/Heading/Index/";
-            alert.Status = true;
-            return PartialView("_Alert",alert);
-        }
 
+            alert.Status = true;
+            return PartialView("_Alert", alert);
+        }
         [HttpGet]
         public ActionResult UpdateHeading(int id)
         {
@@ -90,6 +107,9 @@ namespace MVCProjeKamp.Controllers
 
             return View("HeadingForm", model);
         }
+
+
+
         public ActionResult DeleteHeading(int id)
         {
             var model = hm.GetHeadingByID(id);

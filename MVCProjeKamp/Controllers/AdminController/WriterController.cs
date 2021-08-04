@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using EntityLayer.ViewModels;
 
 namespace MVCProjeKamp.Controllers
 {
@@ -59,8 +60,8 @@ namespace MVCProjeKamp.Controllers
                 return RedirectToAction("GetBannedWriters");
 
             }
-       
-          
+
+
         }
 
         [HttpGet]
@@ -71,33 +72,47 @@ namespace MVCProjeKamp.Controllers
         [HttpPost]
         public ActionResult SaveWriter(Writer writer)
         {
-            int writerID = writer.WriterID;
-            writer.WriterStatus = true;
+            AlertViewModel alert = new AlertViewModel();
+          
 
-            if (!ModelState.IsValid)
+            if (writer.WriterID == 0)
             {
-              
-                return View("WriterForm");
-            }
-            if (writerID == 0)
-            {
+                writer.WriterStatus = true;
+                alert.AlertMessage = writer.WriterName + writer.WriterSurname + " added succesfully...";
+
                 wm.AddWriter(writer);
 
             }
             else
             {
-                //güncelleme
+                if (writer.WriterStatus)
+                {
+                    alert.LinkText = "   Back to Writer List";
+                    alert.URL = "/Writer/Index/";
+                }
+                else
+                {
+                    alert.LinkText = "   Back to Banned Writer List";
+                    alert.URL = "/Writer/GetBannedWriters/";
+
+                }
+                alert.AlertMessage = writer.WriterName + " " + writer.WriterSurname + " updated succesfully...";
                 wm.UpdateWriter(writer);
             }
-            return RedirectToAction("Index");
+
+
+            alert.Status = true;
+            return PartialView("_Alert", alert);
 
         }
 
         [HttpGet]
         public ActionResult UpdateWriter(int id)
         {
-            return View("WriterForm", wm.GetWriterByID(id));
+            var model = wm.GetWriterByID(id);
+            return View("WriterForm", model);
         }
+
 
     }
 }

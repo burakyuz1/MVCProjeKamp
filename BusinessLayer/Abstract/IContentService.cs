@@ -12,6 +12,7 @@ namespace BusinessLayer.Abstract
         void AddContent(Content content);
         void DeleteContent(Content content);
         void UpdateContent(Content content);
+        Content GetContentById(int id);
         List<Content> GetContentList();
         List<Content> GetContentByHeadingID(int id);
         List<Content> GetContentByLoggedUser(string userName);

@@ -18,6 +18,7 @@ namespace BusinessLayer.Abstract
         Heading GetHeadingByID(int id);
 
         int CategoryCount(string categoryName);
+        List<Heading> GetHeadingByWriterID(int? id, bool status);
 
 
 

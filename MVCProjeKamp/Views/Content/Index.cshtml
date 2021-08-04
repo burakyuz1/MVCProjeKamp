@@ -1,0 +1,35 @@
+﻿@model List<EntityLayer.Concrate.Content>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>name
+            </th>
+            <th>writer
+            </th>
+            <th>heading
+            </th>
+            <th>buttons
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ContentText</td>
+                <td>@item.Writer.WriterName</td>
+                <td>@item.Heading.HeadingName</td>
+                <td><a href="/Content/DeleteContent/@item.ContentID" class="btn btn-danger"> sil </a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

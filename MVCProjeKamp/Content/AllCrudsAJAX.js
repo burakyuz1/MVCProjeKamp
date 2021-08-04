@@ -102,3 +102,97 @@ $(function () {
     })
 
 })
+
+$(function () {
+    $("#DivisionForWriters").on("click", "#btnBanWriter", function () {
+        var btn = $(this)
+        var id = $(btn).data("id")
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This writer will be banned permanently. Do you want to continue?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, go on!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Writer/BanWriter/" + id,
+                    success: function () {
+                        btn.parent().parent().parent().parent().remove()
+                    }
+                })
+                Swal.fire(
+                    'Deleted!',
+                    'Writer has been banned.',
+                    'success'
+                )
+            }
+        })
+    })
+})
+
+
+$(function () {
+    $("#DivisionForBannedWriters").on("click", "#btnUnbanWriter", function () {
+        var btn = $(this)
+        var id = $(btn).data("id")
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This writer will be unbanned permanently. Do you want to continue?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, go on!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Writer/BanWriter/" + id,
+                    success: function () {
+                        btn.parent().parent().parent().parent().remove()
+                    }
+                })
+                Swal.fire(
+                    'Unbanned!',
+                    '',
+                    'success'
+                )
+            }
+        })
+    })
+})
+
+$(function () {
+    $("#tblContents").on("click", "#btnDeleteContent", function () {
+        var btn = $(this)
+        var id = $(btn).data("id")
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This writer will be unbanned permanently. Do you want to continue?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, go on!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Content/DeleteContent/" + id,
+                    success: function () {
+                        btn.parent().parent().parent().parent().remove()
+                    }
+                })
+                Swal.fire(
+                    'Unbanned!',
+                    '',
+                    'success'
+                )
+            }
+        })
+    })
+})

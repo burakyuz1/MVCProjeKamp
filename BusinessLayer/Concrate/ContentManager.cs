@@ -31,6 +31,11 @@ namespace BusinessLayer.Concrate
             return _content.List(x => x.HeadingID == id);
         }
 
+        public Content GetContentById(int id)
+        {
+            return _content.Get(m => m.ContentID == id);
+        }
+
         public List<Content> GetContentByLoggedUser(string userName)
         {
             return _content.List(x => x.Writer.WriterMail == userName);
@@ -41,7 +46,7 @@ namespace BusinessLayer.Concrate
             return _content.List();
         }
 
-     
+
 
         public void UpdateContent(Content content)
         {

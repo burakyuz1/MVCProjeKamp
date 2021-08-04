@@ -46,18 +46,18 @@ namespace BusinessLayer.Concrate
 
         public List<Writer> GetWriterList(string writerForSearch)
         {
-            return _writer.List(x => x.WriterName.Contains(writerForSearch) || x.WriterSurname.Contains(writerForSearch) && x.WriterStatus == true);
+            return _writer.List(x => x.WriterName.Contains(writerForSearch) || x.WriterSurname.Contains(writerForSearch) && x.WriterStatus == true );
         }
 
         public List<Writer> GetWriterList(bool status)
         {
             if (status)
             {
-                return _writer.List(x => x.WriterStatus == true);
+                return _writer.List(x => x.WriterStatus == true && x.WriterRole == "u");
             }
             else
             {
-                return _writer.List(x => x.WriterStatus == false);
+                return _writer.List(x => x.WriterStatus == false && x.WriterRole == "u");
             }
 
         }

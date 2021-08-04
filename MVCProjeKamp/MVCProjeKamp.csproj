@@ -2531,7 +2531,6 @@
     <Content Include="Views\Writer\WriterForm.cshtml" />
     <Content Include="Views\Heading\Index.cshtml" />
     <Content Include="Views\Heading\HeadingForm.cshtml" />
-    <Content Include="Views\Content\GetContents.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\About\AddAboutModalPartial.cshtml" />
     <Content Include="Views\Contact\GetSideBarForMessage.cshtml" />
@@ -2554,7 +2553,6 @@
     <Content Include="Views\WriterMessage\NewMessage.cshtml" />
     <Content Include="Views\WriterMessage\GetSideBarForUserMessage.cshtml" />
     <Content Include="Views\WriterMessage\Sendbox.cshtml" />
-    <Content Include="Views\Shared\_HeadingsLayout.cshtml" />
     <Content Include="Views\Default\Headings.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\WriterHeading\AllHeadings.cshtml" />
@@ -2570,6 +2568,7 @@
     <Content Include="Views\ToDoList\IndexFront.cshtml" />
     <Content Include="Views\Charts\Index.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
+    <Content Include="Views\Content\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

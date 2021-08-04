@@ -15,12 +15,12 @@
 
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("SaveWriter", "Writer", FormMethod.Post))
+                @using (Ajax.BeginForm("SaveWriter", "Writer", new AjaxOptions { HttpMethod="POST", UpdateTargetId="alert" }))
                 {
                     <div class="form-group">
                         <label for="inputName">Name</label>
-                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control"})
-                        @Html.ValidationMessageFor(m=>m.WriterName)
+                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WriterName)
 
                     </div>
                     <div class="form-group">
@@ -28,11 +28,11 @@
                         @Html.TextBoxFor(x => x.WriterSurname, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.WriterSurname)
                     </div>
-                    <div class="form-group">                       
-                      
+                    <div class="form-group">
+
                         <label for="inputDescription">Mail</label>
                         @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", type = "email" })
-                        @Html.ValidationMessageFor(m=>m.WriterMail)
+                        @Html.ValidationMessageFor(m => m.WriterMail)
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Password</label>
@@ -52,10 +52,21 @@
                     <div class="form-group">
                         <label for="inputDescription">About yourself</label>
                         @Html.TextAreaFor(x => x.WriterAbout, new { @class = "form-control", rows = "4" })
-                        @Html.ValidationMessageFor(m=>m.WriterAbout)
+                        @Html.ValidationMessageFor(m => m.WriterAbout)
                     </div>
                     @Html.HiddenFor(x => x.WriterID)
-                    <button type="submit" class="btn btn-success btn-lg">Save</button>
+                    @Html.HiddenFor(x=>x.WriterStatus)
+                    @Html.HiddenFor(x=>x.WriterRole)
+                    <div class="row justify-content-between">
+                        <div class="col-1 ">
+                            <button type="submit" class="btn btn-success btn-lg">Save</button>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="alert"> </div>
+
+                        </div>
+
+                    </div>
                 }
             </div>
 

@@ -15,12 +15,18 @@ namespace MVCProjeKamp.Controllers
         // GET: Content
         public ActionResult Index()
         {
-            return View();
+            var model = cm.GetContentList();
+            return View(model);
         }
-        public ActionResult GetContents(int id)
+
+        public ActionResult DeleteContent(int id)
         {
-            
-            return View(cm.GetContentByHeadingID(id));
+            var model = cm.GetContentById(id);
+            cm.DeleteContent(model);
+            return RedirectToAction("Index");
         }
+
+
+
     }
 }

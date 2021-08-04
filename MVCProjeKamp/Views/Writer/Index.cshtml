@@ -57,7 +57,7 @@
 
 
         </div>
-        <div class="card-body pb-0 pt-2">
+        <div id ="DivisionForWriters" class="card-body pb-0 pt-2">
 
 
 
@@ -87,16 +87,19 @@
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
-                                    <a href="#" class="btn btn-sm bg-teal">
-                                        <i class="fas fa-heading"></i>eadings
+                                    <a href="/Heading/Index/@writer.WriterID" class="btn btn-sm bg-teal">
+                                        <i class="fas fa-heading"></i> Titles
+                                    </a>
+                                    <a href="#" class="btn btn-sm bg-secondary">
+                                        <i class="fas fa-heading"></i> Entries
                                     </a>
                                     <a href="/Writer/UpdateWriter/@writer.WriterID" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user-edit"></i> 
-                                         Edit
+                                        <i class="fas fa-user-edit"></i>
+                                        Edit
                                     </a>
-                                    <a href="/Writer/BanWriter/@writer.WriterID" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-ban"></i> 
-                                         Ban
+                                    <a id="btnBanWriter" data-id="@writer.WriterID" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-ban"></i>
+                                        Ban
                                     </a>
                                 </div>
                             </div>

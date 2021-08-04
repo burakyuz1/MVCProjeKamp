@@ -58,13 +58,15 @@ namespace BusinessLayer.Concrate
         {
             return _headings.List(x => x.Writer.WriterMail == userName && x.HeadingStatus == true);
         }
- 
+
         public int CategoryCount(string categoryName)
         {
             return _headings.List(x => x.Category.CategoryName == categoryName).Count;
         }
-        
 
-      
+        public List<Heading> GetHeadingByWriterID(int? id , bool status)
+        {
+            return _headings.List(m => m.WriterID == id && m.HeadingStatus == status);
+        }
     }
 }
